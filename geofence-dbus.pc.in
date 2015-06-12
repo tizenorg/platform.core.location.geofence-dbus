@@ -1,0 +1,11 @@
+prefix=@PREFIX@
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: GEOFENCE dbus Library
+Description: GEOFENCE dbus library
+Requires: glib-2.0 gobject-2.0
+Version: 0.1
+Libs: -L${libdir} -lgeofence-dbus-server -lgeofence-dbus-client
+Cflags: -I${includedir}/geofence-dbus
