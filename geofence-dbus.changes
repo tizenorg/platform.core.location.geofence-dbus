@@ -1,0 +1,64 @@
+[Version] geofence-dbus_0.2.2
+[date] 24 December 2014
+[Title] Fence name has been added in the geofence dbus module
+[Issue#] NA
+[Problem] NA
+[Cause] New feature need to be added to give name to the fence
+[Solution] Fence name has been added in all modules
+[Developer] Karthik Paulraj <p.karthik@samsung.com>
+
+==============================================================================
+
+[Version] geofence-dbus_0.2.1
+[date] 29 August 2014
+[Title] remove deprecated code
+[Issue#] NA
+[Problem] build error
+[Cause] change the api for app_manager_get_package
+[Solution] remove app_manager_get_package
+[Developer] Kisun SHIN <kisun47.shin@samsung.com>
+
+================================================================================
+[Version] geofence-dbus_0.2.0
+[date] 25 June 2014
+[Title] separate create_client & start_client / destroy_client & stop_client
+[Issue#] NA
+[Problem] got the error when destroyed
+[Cause] missing start / stop client
+[Solution] separate start / stop client
+[Developer] Kisun SHIN <kisun47.shin@samsung.com>
+
+================================================================================
+
+[Version] geofence-dbus_0.1.3
+[date] 19 June 2014
+[Title] Remove g_dbus_connection_signal_unsubscribe when geofence stop
+[Issue#] NA
+[Problem] cannot start geofence service after stopped once
+[Cause] whenever stopped geofecne, signal is disconnected.
+[Solution] do not disconnect the geofence signal.
+[Developer] Wooyoung KIM <woo02.kim@samsung.com>
+
+================================================================================
+[Version] geofence-dbus_0.1.2
+[date] 27 May 2014
+[Title] Remove cb in start / Add cb in create
+[Issue#] NA
+[Problem] multi callback when multi geofence
+[Cause] Whenever start, callback is registered.
+[Solution] register the callback when create once.
+[Developer] Kisun SHIN <kisun47.shin@samsung.com>
+
+================================================================================
+
+[Version] geofence-dbus_0.1.1
+[date] 12 May 2014
+[Title] Git update
+[Issue#] NA
+[Problem] NA
+[Cause] NA
+[Solution] NA 
+[Developer] Areum Choi <arumi.choi@samsung.com>
+
+================================================================================
+

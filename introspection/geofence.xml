@@ -1,0 +1,80 @@
+<node>
+	<interface name="org.tizen.lbs.Geofence">
+		<method name="AddGeofence">
+			<arg direction="in" type="s" name="app_id"/>
+			<arg direction="in" type="i" name="place_id"/>			
+			<arg direction="in" type="i" name="geofence_type"/>
+			<arg direction="in" type="d" name="latitude"/>
+			<arg direction="in" type="d" name="longitude"/>
+			<arg direction="in" type="i" name="radius"/>
+			<arg direction="in" type="s" name="address"/>
+			<arg direction="in" type="s" name="bssid"/>
+			<arg direction="in" type="s" name="ssid"/>
+			<arg direction="out" type="i" name="fence_id"/>
+		</method>
+		<method name="AddPlace">
+			<arg direction="in" type="s" name="app_id"/>
+			<arg direction="in" type="s" name="place_name"/>
+			<arg direction="out" type="i" name="place_id"/>
+		</method>
+		<method name="EnableGeofence">
+			<arg direction="in" type="i" name="fence_id"/>
+			<arg direction="in" type="s" name="app_id"/>
+			<arg direction="in" type="b" name="enable"/>
+		</method>
+		<method name="UpdatePlace">
+			<arg direction="in" type="i" name="place_id"/>
+			<arg direction="in" type="s" name="app_id"/>
+			<arg direction="in" type="s" name="place_name"/>
+		</method>
+		<method name="DeleteGeofence">
+			<arg direction="in" type="i" name="fence_id"/>
+			<arg direction="in" type="s" name="app_id"/>
+		</method>
+		<method name="DeletePlace">
+			<arg direction="in" type="i" name="place_id"/>
+			<arg direction="in" type="s" name="app_id"/>
+		</method>
+		<method name="StartGeofence">
+			<arg direction="in" type="i" name="fence_id"/>		
+			<arg direction="in" type="s" name="app_id"/>
+		</method>
+		<method name="StopGeofence">
+			<arg direction="in" type="i" name="fence_id"/>		
+			<arg direction="in" type="s" name="app_id"/>
+		</method>
+		<method name="GetPlaceName">
+			<arg direction="in" type="i" name="place_id"/>
+			<arg direction="in" type="s" name="app_id"/>
+			<arg direction="out" type="i" name="error_code"/>
+			<arg direction="out" type="s" name="place_name"/>
+		</method>
+		<method name="GetList">
+			<arg direction="in" type="i" name="place_id"/>
+			<arg direction="in" type="s" name="app_id"/>
+			<arg direction="out" type="i" name="fence_count"/>
+			<arg direction="out" type="i" name="error_code"/>
+			<arg direction="out" type="aa{sv}" name="geofence_info"/>
+		</method>
+		<method name="GetPlaceList">
+			<arg direction="in" type="s" name="app_id"/>
+			<arg direction="out" type="i" name="place_count"/>
+			<arg direction="out" type="i" name="error_code"/>
+			<arg direction="out" type="aa{sv}" name="place_info"/>
+		</method>
+		<signal name="GeofenceInout">
+			<arg direction="out" type="s" name="app_id"/>
+			<arg direction="out" type="i" name="fence_id"/>
+			<arg direction="out" type="i" name="access_type"/>
+			<arg direction="out" type="i" name="fence_state"/>
+		</signal>
+		<signal name="GeofenceEvent">
+			<arg direction="out" type="i" name="place_id"/>
+			<arg direction="out" type="i" name="fence_id"/>
+			<arg direction="out" type="i" name="access_type"/>
+			<arg direction="out" type="s" name="app_id"/>
+			<arg direction="out" type="i" name="error"/>
+			<arg direction="out" type="i" name="state"/>
+		</signal>
+	</interface>
+</node>
