@@ -14,6 +14,7 @@
  */
 
 #include <stdio.h>
+#include <glib.h>
 
 #include "generated-code.h"
 #include "geofence_dbus_server.h"
@@ -411,7 +412,8 @@ static void on_bus_acquired(GDBusConnection *conn, const gchar *name, gpointer u
 		/* register callback for each methods for geofence */
 		geofence = sloc_object_get_geofence(SLOC_OBJECT(ctx->obj_skeleton));
 	}
-	g_return_if_fail(geofence);
+	if (geofence == NULL)
+		return;
 
 	if (ctx->add_geofence_cb)
 		ctx->add_geofence_h = g_signal_connect(geofence, "handle-add-geofence", G_CALLBACK(on_add_geofence), ctx);	/* user_data */
