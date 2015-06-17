@@ -62,9 +62,9 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 %make_install
 
-%post -p /sbin/ldconfig
+%post -n libgeofence-dbus -p /sbin/ldconfig
 
-%postun -p /sbin/ldconfig
+%postun -n libgeofence-dbus -p /sbin/ldconfig
 
 
 %files -n libgeofence-dbus
