@@ -6,7 +6,7 @@ Group:      Location/Libraries
 License:    Apache-2.0
 Source0:    geofence-dbus-%{version}.tar.gz
 
-%if "%{?tizen_profile_name}" == "tv"
+%if "%{?profile}" == "tv"
 ExcludeArch: %{arm} %ix86 x86_64
 %endif
 
@@ -62,9 +62,9 @@ make %{?jobs:-j%jobs}
 rm -rf %{buildroot}
 %make_install
 
-%post -p /sbin/ldconfig
+%post -n libgeofence-dbus -p /sbin/ldconfig
 
-%postun -p /sbin/ldconfig
+%postun -n libgeofence-dbus -p /sbin/ldconfig
 
 
 %files -n libgeofence-dbus
