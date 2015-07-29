@@ -3,12 +3,11 @@ PROJECT(geofence-dbus C)
 
 SET(PREFIX ${CMAKE_INSTALL_PREFIX})
 SET(EXEC_PREFIX "\${prefix}")
-SET(LIBDIR ${LIBDIR})
 SET(INCLUDEDIR "\${prefix}/include")
 
 # Set required packages
 INCLUDE(FindPkgConfig)
-pkg_check_modules(pkgs REQUIRED glib-2.0 gio-2.0 gthread-2.0 dlog gobject-2.0 gio-unix-2.0 capi-appfw-app-manager capi-appfw-package-manager pkgmgr-info)
+pkg_check_modules(pkgs REQUIRED glib-2.0 gio-2.0 gthread-2.0 dlog gobject-2.0 gio-unix-2.0)
 
 FOREACH(flag ${pkgs_CFLAGS})
 	SET(EXTRA_CFLAGS "${EXTRA_CFLAGS} ${flag}")
@@ -23,7 +22,6 @@ SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-unused-parameter -Wno-missing-field-ini
 
 ADD_DEFINITIONS("-DFEATURE_DLOG_DEBUG")
 ADD_DEFINITIONS("-DPREFIX=\"${CMAKE_INSTALL_PREFIX}\"")
-ADD_DEFINITIONS("-DLIBDIR=\"${LIBDIR}\"")
 ADD_DEFINITIONS(" -DEXPORT_API=\"__attribute__((visibility(\\\"default\\\")))\" ")
 
 IF ( ENABLE_DOCOMO_LOCATION )

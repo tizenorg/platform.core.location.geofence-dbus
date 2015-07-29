@@ -1,6 +1,6 @@
 Name: geofence-dbus
 Summary: Dbus interface for Geofence service
-Version: 0.2.2
+Version: 0.3.0
 Release:    1
 Group:      Location/Libraries
 License:    Apache-2.0
@@ -16,14 +16,9 @@ BuildRequires:  cmake
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(gobject-2.0)
 BuildRequires:  pkgconfig(dlog)
-#BuildRequires:  pkgconfig(security-server)
 BuildRequires:  pkgconfig(gio-2.0)
 BuildRequires:  pkgconfig(gio-unix-2.0)
-BuildRequires:  pkgconfig(capi-appfw-app-manager)
-BuildRequires:  pkgconfig(capi-appfw-package-manager)
-BuildRequires:  pkgconfig(pkgmgr-info)
-BuildRequires:  python
-BuildRequires:  python-xml
+BuildRequires:  pkgconfig(capi-base-common)
 
 %description
 Geofence dbus interface

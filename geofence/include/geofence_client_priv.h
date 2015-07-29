@@ -40,5 +40,5 @@ __BEGIN_DECLS
 #define GEOFENCE_CLIENT_LOGE(fmt, args...)
 #define GEOFENCE_CLIENT_SECLOG(fmt, args...)
 #endif
-  __END_DECLS
+__END_DECLS
 #endif /* __GEOFENCE_CLIENT_PRIV_H__ */

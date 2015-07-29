@@ -40,5 +40,5 @@ __BEGIN_DECLS
 #define GEOFENCE_DBUS_SERVER_LOGE(fmt, args...)
 #define GEOFENCE_DBUS_SERVER_SECLOG(fmt, args...)
 #endif
-  __END_DECLS
+__END_DECLS
 #endif /*__GEOFENCE_DBUS_SERVER_PRIV_H__*/
