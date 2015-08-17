@@ -517,12 +517,8 @@ static int __geofence_client_create_connection(geofence_client_dbus_s *client)
 	g_return_val_if_fail(client, GEOFENCE_CLIENT_ERROR_PARAMETER);
 	GError *error = NULL;
 
-#if 0
-	client->conn = g_bus_get_sync(G_BUS_TYPE_SYSTEM, NULL, &error);
-#endif
-
 	char *bus_addr = NULL;
-	bus_addr = g_dbus_address_get_for_bus_sync(G_BUS_TYPE_SYSTEM, NULL, &error);
+	bus_addr = g_dbus_address_get_for_bus_sync(G_BUS_TYPE_SESSION, NULL, &error);
 	if (!bus_addr) {
 		GEOFENCE_CLIENT_LOGD("Fail to get addr of bus.");
 		return GEOFENCE_CLIENT_ERROR_CONNECTION;
