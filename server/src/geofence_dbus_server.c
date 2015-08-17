@@ -493,7 +493,7 @@ EXPORT_API int geofence_dbus_server_create(geofence_dbus_server_h *geofence_dbus
 	/* set gefence callbacks  */
 	server->dbus_callback = geofence_dbus_callback;
 
-	server->owner_id = g_bus_own_name(G_BUS_TYPE_SYSTEM, server->service_name, G_BUS_NAME_OWNER_FLAGS_REPLACE, on_bus_acquired, on_name_acquired, on_name_lost, server, NULL);
+	server->owner_id = g_bus_own_name(G_BUS_TYPE_SESSION, server->service_name, G_BUS_NAME_OWNER_FLAGS_REPLACE, on_bus_acquired, on_name_acquired, on_name_lost, server, NULL);
 	GEOFENCE_DBUS_SERVER_LOGD("g_bus_own_name id=[%d]", server->owner_id);
 	*geofence_dbus_server = (geofence_dbus_server_s *) server;
 
