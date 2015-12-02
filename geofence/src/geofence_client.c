@@ -28,6 +28,7 @@ typedef struct _geofence_client_dbus_s {
 	gchar *service_path;
 	gchar *signal_path;
 	int geofence_evt_id;
+	int geofence_proximity_id;
 	int geofence_evt_status_id;
 	geofence_client_cb user_cb;
 	void *user_data;
@@ -432,6 +433,14 @@ EXPORT_API int geo_client_start(geofence_client_dbus_h geofence_client, geofence
 			GEOFENCE_CLIENT_LOGD("Fail to listen GeofenceInout");
 		}
 
+		handle->geofence_proximity_id = g_dbus_connection_signal_subscribe(handle->conn, handle->service_name, GEOFENCE_INTERFACE_NAME, "GeofenceProximity", handle->signal_path, NULL, G_DBUS_SIGNAL_FLAGS_NONE, __geofence_signal_callback, handle, NULL);
+
+		if (handle->geofence_proximity_id) {
+			GEOFENCE_CLIENT_LOGD("Listening GeofenceProximity");
+		} else {
+			GEOFENCE_CLIENT_LOGD("Fail to listen GeofenceProximity");
+		}
+
 		handle->geofence_evt_status_id = g_dbus_connection_signal_subscribe(handle->conn, handle->service_name,	GEOFENCE_INTERFACE_NAME, "GeofenceEvent", handle->signal_path,	NULL, G_DBUS_SIGNAL_FLAGS_NONE, __geofence_signal_callback, handle, NULL);
 
 		if (handle->geofence_evt_status_id) {
@@ -481,6 +490,10 @@ static void __geo_client_signal_unsubcribe(geofence_client_dbus_h geofence_clien
 	if (handle->geofence_evt_status_id) {
 		g_dbus_connection_signal_unsubscribe(handle->conn, handle->geofence_evt_status_id);
 		handle->geofence_evt_status_id = 0;
+	}
+	if (handle->geofence_proximity_id) {
+		g_dbus_connection_signal_unsubscribe(handle->conn, handle->geofence_proximity_id);
+		handle->geofence_proximity_id = 0;
 	}
 }
 

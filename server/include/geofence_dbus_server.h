@@ -122,6 +122,8 @@ typedef GVariant *(*GeofenceGetPlacesCB)(const gchar *app_id, int *fence_cnt, in
 */
 int geofence_dbus_server_send_geofence_inout_changed(geofence_dbus_server_h geofence_dbus_server, const gchar *app_id, gint fence_id, gint access_type, gint fence_state);
 
+int geofence_dbus_server_send_geofence_proximity_changed(geofence_dbus_server_h geofence_dbus_server, const gchar *app_id, gint fence_id, gint access_type, gint fence_proximity_state, gint provider);
+
 int geofence_dbus_server_send_geofence_event_changed(geofence_dbus_server_h geofence_dbus_server, gint place_id, gint fence_id, gint access_type, const gchar *app_id, gint error, gint state);
 
 typedef struct {

@@ -42,6 +42,13 @@
 			<arg direction="out" type="i" name="access_type"/>
 			<arg direction="out" type="i" name="fence_state"/>
 		</signal>
+		<signal name="GeofenceProximity">
+			<arg direction="out" type="s" name="app_id"/>
+			<arg direction="out" type="i" name="fence_id"/>
+			<arg direction="out" type="i" name="access_type"/>
+			<arg direction="out" type="i" name="fence_proximity_state"/>
+			<arg direction="out" type="i" name="provider"/>
+		</signal>
 
 		<!-- Place Management -->
 		<method name="AddPlace">

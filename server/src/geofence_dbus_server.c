@@ -443,6 +443,25 @@ EXPORT_API int geofence_dbus_server_send_geofence_inout_changed(geofence_dbus_se
 	return GEOFENCE_DBUS_SERVER_ERROR_NONE;
 }
 
+EXPORT_API int geofence_dbus_server_send_geofence_proximity_changed(geofence_dbus_server_h geofence_dbus_server, const gchar *app_id, gint fence_id, gint access_type, gint fence_proximity_state, gint provider)
+{
+	GEOFENCE_DBUS_SERVER_LOGD("ENTER >>>");
+	g_return_val_if_fail(geofence_dbus_server, GEOFENCE_DBUS_SERVER_ERROR_PARAMETER);
+
+	geofence_dbus_server_s *handle = (geofence_dbus_server_s *)geofence_dbus_server;
+	g_return_val_if_fail(handle->obj_skeleton, GEOFENCE_DBUS_SERVER_ERROR_PARAMETER);
+
+	SLocGeofence *geofence = NULL;
+	geofence = sloc_object_get_geofence(SLOC_OBJECT(handle->obj_skeleton));
+	g_return_val_if_fail(geofence, GEOFENCE_DBUS_SERVER_ERROR_PARAMETER);
+
+	sloc_geofence_emit_geofence_proximity(geofence, app_id, fence_id, access_type, fence_proximity_state, provider);
+	g_object_unref(geofence);
+
+	return GEOFENCE_DBUS_SERVER_ERROR_NONE;
+}
+
+
 EXPORT_API int geofence_dbus_server_send_geofence_event_changed(geofence_dbus_server_h geofence_dbus_server, gint place_id, gint fence_id, gint access_type, const gchar *app_id, gint error, gint state)
 {
 	GEOFENCE_DBUS_SERVER_LOGD("ENTER >>>");
