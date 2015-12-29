@@ -26,7 +26,6 @@ Geofence dbus interface
 %package -n libgeofence-dbus
 Summary:    Geofence dbus library
 Group:      Location/Libraries
-Requires(post): sys-assert
 
 %description -n libgeofence-dbus
 Geofence client API library
