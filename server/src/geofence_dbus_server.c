@@ -501,8 +501,6 @@ EXPORT_API int geofence_dbus_server_create(geofence_dbus_server_h *geofence_dbus
 	geofence_dbus_server_s *server = g_new0(geofence_dbus_server_s, 1);
 	g_return_val_if_fail(server, GEOFENCE_DBUS_SERVER_ERROR_MEMORY);
 
-	/* 	g_log_set_default_handler(__glib_log, server);	*/
-
 	server->service_name = g_strdup(GEOFENCE_SERVICE_NAME);
 	server->service_path = g_strdup(GEOFENCE_SERVICE_PATH);
 	server->manager = g_dbus_object_manager_server_new(server->service_path);
@@ -525,6 +523,7 @@ EXPORT_API int geofence_dbus_server_destroy(geofence_dbus_server_h geofence_dbus
 
 	geofence_dbus_server_s *server = (geofence_dbus_server_s *)geofence_dbus_server;
 	int ret = GEOFENCE_DBUS_SERVER_ERROR_NONE;
+
 	g_bus_unown_name(server->owner_id);
 	if (server->prev_owner) {
 		g_free(server->prev_owner);

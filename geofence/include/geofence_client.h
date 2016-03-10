@@ -56,25 +56,28 @@ typedef void (*geofence_client_event_cb)(const char *sig, GVariant *param, void 
 * @brief	API to add the geofence. This will call the server API.
 * @param[in]	geofence_client - Client dbus handle
 * @param[in]	app_id - Caller's application ID
+* @param[in]	place_id - place id for add geofence
 * @param[in]	latitude - latitude value if is a geopoint geofence
 * @param[in]	longitude - longitude value if it is a geopint geofence
 * @param[in]	radius - radius value if it is a geopoint geofence
 * @param[in]	bssid - bssid value if it is a wifi/BT geofence
+* @param[out] error_code - Error that has occured on the server side
 * @return	int
 * @retval	returns the fence-id of the geofence added
 * @see geo_client_delete_geofence
 */
-int geo_client_add_geofence(geofence_client_dbus_h geofence_client, gchar *app_id, gint place_id, gint geofence_type, gdouble latitude, gdouble longitude, gint radius, const gchar *address, const gchar *bssid, const gchar *ssid);
+int geo_client_add_geofence(geofence_client_dbus_h geofence_client, gchar *app_id, gint place_id, gint geofence_type, gdouble latitude, gdouble longitude, gint radius, const gchar *address, const gchar *bssid, const gchar *ssid, gint *error_code);
 
 /**
 * @brief	API to add the place. This will call the server API
 * @param[in]	geofence_client - Client dbus handle
 * @param[in]	app_id - Caller's application ID
 * @param[in]	place_name - Name of the place
+* @param[out] error_code - Error that has occured on the server side
 * retval	returns the place_id of the place added
 * @see geo_client_delete_place
 */
-int geo_client_add_place(geofence_client_dbus_h geofence_client, gchar *appid, const gchar *place_name);
+int geo_client_add_place(geofence_client_dbus_h geofence_client, gchar *app_id, const gchar *place_name, gint *error_code);
 
 /**
 * @brief        API to update the place. This will call the server API
