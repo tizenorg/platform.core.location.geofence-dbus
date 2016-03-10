@@ -46,7 +46,7 @@ static void __geofence_signal_callback(GDBusConnection *conn, const gchar *name,
 		handle->user_cb(sig, param, handle->user_data);
 }
 
-EXPORT_API int geo_client_add_geofence(geofence_client_dbus_h geofence_client, gchar *app_id, gint place_id, gint geofence_type, gdouble latitude, gdouble longitude, gint radius, const gchar *address, const gchar *bssid, const gchar *ssid)
+EXPORT_API int geo_client_add_geofence(geofence_client_dbus_h geofence_client, gchar *app_id, gint place_id, gint geofence_type, gdouble latitude, gdouble longitude, gint radius, const gchar *address, const gchar *bssid, const gchar *ssid, gint *error_code)
 {
 	GEOFENCE_CLIENT_LOGD("ENTER >>>");
 	g_return_val_if_fail(geofence_client, GEOFENCE_CLIENT_ERROR_PARAMETER);
@@ -71,6 +71,7 @@ EXPORT_API int geo_client_add_geofence(geofence_client_dbus_h geofence_client, g
 				GEOFENCE_CLIENT_LOGE("Fail to add geofence Error[%s]", error->message);
 				g_error_free(error);
 			}
+			*error_code = GEOFENCE_CLIENT_ACCESS_DENIED;
 		}
 		g_object_unref(proxy);
 	} else {
@@ -102,8 +103,8 @@ EXPORT_API int geo_client_delete_geofence(geofence_client_dbus_h geofence_client
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
 			g_error_free(error);
-			ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 		}
+		ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 	}
 
 	return ret;
@@ -141,8 +142,8 @@ EXPORT_API int geo_client_get_geofences(geofence_client_dbus_h geofence_client, 
 			if (error) {
 				GEOFENCE_CLIENT_LOGE("Fail to get the list Error[%s]", error->message);
 				g_error_free(error);
-				ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 			}
+			ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 		}
 		g_object_unref(proxy);
 	} else {
@@ -173,8 +174,8 @@ EXPORT_API int geo_client_enable_geofence(geofence_client_dbus_h geofence_client
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
 			g_error_free(error);
-			ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 		}
+		ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 	}
 
 	return ret;
@@ -199,8 +200,8 @@ EXPORT_API int geo_client_start_geofence(geofence_client_dbus_h geofence_client,
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
 			g_error_free(error);
-			ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 		}
+		ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 	}
 	return ret;
 }
@@ -224,14 +225,14 @@ EXPORT_API int geo_client_stop_geofence(geofence_client_dbus_h geofence_client, 
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
 			g_error_free(error);
-			ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 		}
+		ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 	}
 
 	return ret;
 }
 
-EXPORT_API int geo_client_add_place(geofence_client_dbus_h geofence_client, gchar *app_id, const gchar *place_name)
+EXPORT_API int geo_client_add_place(geofence_client_dbus_h geofence_client, gchar *app_id, const gchar *place_name, gint *error_code)
 {
 	/* add fence interface between App & geofence-server */
 	GEOFENCE_CLIENT_LOGD("ENTER >>>");
@@ -258,6 +259,7 @@ EXPORT_API int geo_client_add_place(geofence_client_dbus_h geofence_client, gcha
 				GEOFENCE_CLIENT_LOGE("Fail to add place Error[%s]", error->message);
 				g_error_free(error);
 			}
+			*error_code = GEOFENCE_CLIENT_ACCESS_DENIED;
 		}
 		g_object_unref(proxy);
 	} else {
@@ -289,8 +291,8 @@ EXPORT_API int geo_client_update_place(geofence_client_dbus_h geofence_client, g
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
 			g_error_free(error);
-			ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 		}
+		ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 	}
 
 	return ret;
@@ -313,8 +315,8 @@ EXPORT_API int geo_client_delete_place(geofence_client_dbus_h geofence_client, g
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
 			g_error_free(error);
-			ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 		}
+		ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 	}
 
 	return ret;
@@ -346,8 +348,8 @@ EXPORT_API int geo_client_get_place_name(geofence_client_dbus_h geofence_client,
 			if (error) {
 				GEOFENCE_CLIENT_LOGE("Fail to get the place name Error[%s]", error->message);
 				g_error_free(error);
-				ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 			}
+			ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 		}
 		g_object_unref(proxy);
 	} else {
@@ -394,16 +396,16 @@ EXPORT_API int geo_client_get_places(geofence_client_dbus_h geofence_client, gch
 			if (error) {
 				GEOFENCE_CLIENT_LOGE("Fail to get the place list Error[%s]", error->message);
 				g_error_free(error);
-				ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 			}
+			ret = GEOFENCE_CLIENT_ACCESS_DENIED;
 		}
 		g_object_unref(proxy);
 	} else {
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
 			g_error_free(error);
-			ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 		}
+		ret = GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 	}
 
 	return ret;
