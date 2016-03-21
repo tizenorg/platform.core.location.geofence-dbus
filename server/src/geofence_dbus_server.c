@@ -377,7 +377,7 @@ static void on_bus_acquired(GDBusConnection *conn, const gchar *name, gpointer u
 
 	geofence_dbus_callback_s *dbus_callback = ctx->dbus_callback;
 	geofence_dbus_signal_s *dbus_signal = g_new0(geofence_dbus_signal_s, 1);
-	g_return_val_if_fail(dbus_signal, GEOFENCE_DBUS_SERVER_ERROR_MEMORY);
+	g_return_if_fail(dbus_signal);
 
 	if (dbus_callback->add_geofence_cb)
 		dbus_signal->add_geofence_h = g_signal_connect(geofence, "handle-add-geofence", G_CALLBACK(on_add_geofence), ctx);
