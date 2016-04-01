@@ -312,9 +312,9 @@ EXPORT_API int geo_client_delete_place(geofence_client_dbus_h geofence_client, g
 	int ret = GEOFENCE_CLIENT_ERROR_NONE;
 
 	proxy = g_dbus_proxy_new_sync(handle->conn, G_DBUS_PROXY_FLAGS_NONE, NULL, handle->service_name, handle->signal_path, GEOFENCE_INTERFACE_NAME, NULL, &error);
-	if (proxy) {
+	if (proxy)
 		g_dbus_proxy_call(proxy, "DeletePlace",	g_variant_new("(is)", place_id, app_id), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, &error);
-	} else {
+	else {
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
 			g_error_free(error);
@@ -422,7 +422,6 @@ EXPORT_API int geo_client_start(geofence_client_dbus_h geofence_client, geofence
 	g_return_val_if_fail(geofence_client, GEOFENCE_CLIENT_ERROR_PARAMETER);
 
 	geofence_client_dbus_s *handle = (geofence_client_dbus_s *)geofence_client;
-	gchar *signal_path = NULL;
 
 	handle->service_name = g_strdup(GEOFENCE_SERVICE_NAME);
 	handle->service_path = g_strdup(GEOFENCE_SERVICE_PATH);
@@ -434,36 +433,31 @@ EXPORT_API int geo_client_start(geofence_client_dbus_h geofence_client, geofence
 		handle->user_data = user_data;
 		handle->geofence_evt_id = g_dbus_connection_signal_subscribe(handle->conn, handle->service_name, GEOFENCE_INTERFACE_NAME, "GeofenceInout", handle->signal_path, NULL, G_DBUS_SIGNAL_FLAGS_NONE, __geofence_signal_callback, handle, NULL);
 
-		if (handle->geofence_evt_id) {
+		if (handle->geofence_evt_id)
 			GEOFENCE_CLIENT_LOGD("Listening GeofenceInout");
-		} else {
+		else
 			GEOFENCE_CLIENT_LOGD("Fail to listen GeofenceInout");
-		}
 
 		handle->geofence_proximity_id = g_dbus_connection_signal_subscribe(handle->conn, handle->service_name, GEOFENCE_INTERFACE_NAME, "GeofenceProximity", handle->signal_path, NULL, G_DBUS_SIGNAL_FLAGS_NONE, __geofence_signal_callback, handle, NULL);
 
-		if (handle->geofence_proximity_id) {
+		if (handle->geofence_proximity_id)
 			GEOFENCE_CLIENT_LOGD("Listening GeofenceProximity");
-		} else {
+		else
 			GEOFENCE_CLIENT_LOGD("Fail to listen GeofenceProximity");
-		}
 
 		handle->geofence_evt_status_id = g_dbus_connection_signal_subscribe(handle->conn, handle->service_name,	GEOFENCE_INTERFACE_NAME, "GeofenceEvent", handle->signal_path,	NULL, G_DBUS_SIGNAL_FLAGS_NONE, __geofence_signal_callback, handle, NULL);
 
-		if (handle->geofence_evt_status_id) {
+		if (handle->geofence_evt_status_id)
 			GEOFENCE_CLIENT_LOGD("Listening Geofence event");
-		} else {
+		else {
 			GEOFENCE_CLIENT_LOGD("Fail to listen Geofence event");
 			return GEOFENCE_CLIENT_ERROR_DBUS_CALL;
 		}
 	}
-	g_free(signal_path);
-
 
 #if SUPPORT_MULTI_CLIENT
 	GVariant *param = NULL;
 	GVariantBuilder *builder = NULL;
-
 
 	GEOFENCE_CLIENT_LOGD("START: CMD-START");
 	builder = g_variant_builder_new(G_VARIANT_TYPE("a{sv}"));
@@ -547,9 +541,9 @@ static int __geofence_client_create_connection(geofence_client_dbus_s *client)
 	GEOFENCE_CLIENT_LOGD("bus_addr: %s", bus_addr);
 
 	client->conn = g_dbus_connection_new_for_address_sync(bus_addr,
-	                                                      G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT |
-	                                                      G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION,
-	                                                      NULL, NULL, &error);
+														G_DBUS_CONNECTION_FLAGS_AUTHENTICATION_CLIENT |
+														G_DBUS_CONNECTION_FLAGS_MESSAGE_BUS_CONNECTION,
+														NULL, NULL, &error);
 	g_free(bus_addr);
 
 	if (!client->conn) {
@@ -568,9 +562,9 @@ static int __geofence_client_create_connection(geofence_client_dbus_s *client)
 static void __glib_log(const gchar *log_domain, GLogLevelFlags log_level, const gchar *msg, gpointer user_data)
 {
 	geofence_client_dbus_s *client = (geofence_client_dbus_s *)user_data;
-	if (client != NULL) {
+	if (client != NULL)
 		GEOFENCE_CLIENT_LOGD("client->conn: %p", client->conn);
-	}
+
 	GEOFENCE_CLIENT_LOGE("GLIB[%d]: %s", log_level, msg);
 }
 

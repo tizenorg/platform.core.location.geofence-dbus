@@ -1,6 +1,6 @@
 Name: geofence-dbus
 Summary: Dbus interface for Geofence service
-Version: 0.3.2
+Version: 0.3.3
 Release:    1
 Group:      Location/Libraries
 License:    Apache-2.0

@@ -28,10 +28,10 @@ __BEGIN_DECLS
 #undef LOG_TAG
 #define LOG_TAG "GEOFENCE_DBUS_CLIENT"
 #endif
-#define GEOFENCE_CLIENT_LOGI(fmt, args...)  { LOGI(fmt, ##args); }
-#define GEOFENCE_CLIENT_LOGD(fmt, args...)  { LOGD(fmt, ##args); }
-#define GEOFENCE_CLIENT_LOGW(fmt, args...)  { LOGW(fmt, ##args); }
-#define GEOFENCE_CLIENT_LOGE(fmt, args...)  { LOGE(fmt, ##args); }
+#define GEOFENCE_CLIENT_LOGI(fmt, args...)  LOGI(fmt, ##args)
+#define GEOFENCE_CLIENT_LOGD(fmt, args...)  LOGD(fmt, ##args)
+#define GEOFENCE_CLIENT_LOGW(fmt, args...)  LOGW(fmt, ##args)
+#define GEOFENCE_CLIENT_LOGE(fmt, args...)  LOGE(fmt, ##args)
 #define GEOFENCE_CLIENT_SECLOG(fmt, args...) SECURE_LOGW(fmt, ##args)
 #else
 #define GEOFENCE_CLIENT_LOGI(fmt, args...)
