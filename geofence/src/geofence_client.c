@@ -100,6 +100,7 @@ EXPORT_API int geo_client_delete_geofence(geofence_client_dbus_h geofence_client
 	proxy = g_dbus_proxy_new_sync(handle->conn, G_DBUS_PROXY_FLAGS_NONE, NULL, handle->service_name, handle->signal_path, GEOFENCE_INTERFACE_NAME, NULL, &error);
 	if (proxy) {
 		g_dbus_proxy_call(proxy, "DeleteGeofence", g_variant_new("(is)", fence_id, app_id), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, &error);
+		g_object_unref(proxy);
 	} else {
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
@@ -172,6 +173,7 @@ EXPORT_API int geo_client_enable_geofence(geofence_client_dbus_h geofence_client
 	proxy = g_dbus_proxy_new_sync(handle->conn, G_DBUS_PROXY_FLAGS_NONE, NULL, handle->service_name, handle->signal_path, GEOFENCE_INTERFACE_NAME, NULL, &error);
 	if (proxy) {
 		g_dbus_proxy_call(proxy, "EnableGeofence", g_variant_new("(isb)", geofence_id, app_id, onoff),	G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, &error);
+		g_object_unref(proxy);
 	} else {
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
@@ -198,6 +200,7 @@ EXPORT_API int geo_client_start_geofence(geofence_client_dbus_h geofence_client,
 	proxy = g_dbus_proxy_new_sync(handle->conn, G_DBUS_PROXY_FLAGS_NONE, NULL, handle->service_name, handle->signal_path, GEOFENCE_INTERFACE_NAME, NULL, &error);
 	if (proxy) {
 		g_dbus_proxy_call(proxy, "StartGeofence", g_variant_new("(is)", geofence_id, app_id), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, &error);
+		g_object_unref(proxy);
 	} else {
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
@@ -223,6 +226,7 @@ EXPORT_API int geo_client_stop_geofence(geofence_client_dbus_h geofence_client, 
 	proxy = g_dbus_proxy_new_sync(handle->conn, G_DBUS_PROXY_FLAGS_NONE, NULL, handle->service_name, handle->signal_path, GEOFENCE_INTERFACE_NAME, NULL, &error);
 	if (proxy) {
 		g_dbus_proxy_call(proxy, "StopGeofence", g_variant_new("(is)", geofence_id, app_id), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, &error);
+		g_object_unref(proxy);
 	} else {
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
@@ -290,6 +294,7 @@ EXPORT_API int geo_client_update_place(geofence_client_dbus_h geofence_client, g
 	proxy = g_dbus_proxy_new_sync(handle->conn, G_DBUS_PROXY_FLAGS_NONE, NULL, handle->service_name, handle->signal_path, GEOFENCE_INTERFACE_NAME, NULL, &error);
 	if (proxy) {
 		g_dbus_proxy_call(proxy, "UpdatePlace",	g_variant_new("(iss)", place_id, app_id, place_name), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, &error);
+		g_object_unref(proxy);
 	} else {
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
@@ -312,8 +317,10 @@ EXPORT_API int geo_client_delete_place(geofence_client_dbus_h geofence_client, g
 	int ret = GEOFENCE_CLIENT_ERROR_NONE;
 
 	proxy = g_dbus_proxy_new_sync(handle->conn, G_DBUS_PROXY_FLAGS_NONE, NULL, handle->service_name, handle->signal_path, GEOFENCE_INTERFACE_NAME, NULL, &error);
-	if (proxy)
+	if (proxy) {
 		g_dbus_proxy_call(proxy, "DeletePlace",	g_variant_new("(is)", place_id, app_id), G_DBUS_CALL_FLAGS_NONE, -1, NULL, NULL, &error);
+		g_object_unref(proxy);
+	}
 	else {
 		if (error) {
 			GEOFENCE_CLIENT_LOGE("Fail to get proxy Error[%s]", error->message);
